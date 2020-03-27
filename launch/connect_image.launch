@@ -1,0 +1,24 @@
+<launch>
+
+  <node name="image_transport_left"
+        pkg="image_transport" type="republish"
+        args="compressed" >
+    <remap from="in" to="/camera/left/decimate/image_raw" />
+    <remap from="out" to="/camera/left/image_decompress" />
+  </node>
+
+  <node name="image_transport_right"
+        pkg="image_transport" type="republish"
+        args="compressed" >
+    <remap from="in" to="/camera/right/decimate/image_raw" />
+    <remap from="out" to="/camera/right/image_decompress" />
+  </node>
+
+  <node name="left_image_relay" pkg="topic_tools" type="relay" args="/camera/left/image_decompress /image_left" />
+  <node name="right_image_relay" pkg="topic_tools" type="relay" args="/camera/right/image_decompress /image_right" />
+  <!--
+  <node name="left_info_relay" pkg="topic_tools" type="relay" args="/camera/left/camera_info /camera_info_left" />
+  <node name="right_info_relay" pkg="topic_tools" type="relay" args="/camera/right/camera_info /camera_info_right" />
+  -->
+
+</launch>
