@@ -1,10 +1,15 @@
 <?xml version="1.0"?>
 <launch>
 
+  <arg name="left_controller" default="controller_LHR_FD2D1945"/>
+  <arg name="right_controller" default="controller_LHR_FF39B943"/>
   <rosparam param="/vive/world_offset">[0, 0, 2.265]</rosparam>
   <rosparam param="/vive/world_yaw">0.0</rosparam>
 
   <node name="vive_node" pkg="vive_ros" type="vive_node" launch-prefix="$(find vive_ros)/scripts/find_steam_runtime.sh" output="screen" required="true"/>
+
+  <node name="left_controller_transformer" pkg="tf" type="static_transform_publisher" args="0.0 0.0 0.10 1.57 0 0 $(arg left_controller) $(arg left_controller)_converted 200" output="screen"/>
+  <node name="right_controller_transformer" pkg="tf" type="static_transform_publisher" args="0.0 0.0 0.10 1.57 0 0 $(arg right_controller) $(arg right_controller)_converted 200" output="screen"/>
 
 </launch>
 
