@@ -22,7 +22,7 @@ void mySigintHandler(int sig){
 ros::shutdown();
 }
 
-//#define USE_IMAGE
+#define USE_IMAGE
 
 #define USE_OPENGL
 //#define USE_VULKAN
